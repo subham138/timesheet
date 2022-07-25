@@ -1,0 +1,255 @@
+<%- include("../../partials/template") %>
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+
+        <!-- Content Row -->
+        <div class="row">
+
+            <div class="col-xl-12 col-lg-12">
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Projects Entry</h6>
+                        <div class="dropdown no-arrow">
+                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <form action="/project_entry" class="user" method="POST">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <div class="col-sm-3 mb-3 mb-sm-0">
+                                            <label for="project_id">Project ID</label>
+                                        </div>
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" class="form-control" id="project_id" name="project_id"
+                                                placeholder="Project ID" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <div class="col-sm-3 mb-3 mb-sm-0">
+                                            <label for="project_name">Project Name</label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" id="project_name"
+                                                name="project_name" placeholder="Project Name">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <div class="col-sm-3 mb-3 mb-sm-0">
+                                            <label for="project_type">Project Type</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <select class="form-control" id="project_type" name="project_type" required>
+                                                <option>Select Type</option>
+                                                <% project_type.forEach((data)=> { %>
+                                                    <option value="<%= data._id %>">
+                                                        <%= data.name %>
+                                                    </option>
+                                                    <% }) %>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <div class="col-sm-3 mb-3 mb-sm-0">
+                                            <label for="clint_type">Clint Type</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <select class="form-control" id="clint_type" name="clint_type" required>
+                                                <option>Select Type</option>
+                                                <% clint_type.forEach((data)=> { %>
+                                                    <option value="<%= data._id %>">
+                                                        <%= data.name %>
+                                                    </option>
+                                                    <% }) %>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <div class="col-sm-3 mb-3 mb-sm-0">
+                                            <label for="po_of_cont_1">Point of Contact 1</label>
+                                        </div>
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" class="form-control" id="po_of_cont_1"
+                                                name="po_of_cont_1" placeholder="Point of Contact 1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <div class="col-sm-3 mb-3 mb-sm-0">
+                                            <label for="po_of_cont_2">Point of Contact 2</label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" id="po_of_cont_2"
+                                                name="po_of_cont_2" placeholder="Point of Contact 2">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <div class="col-sm-2 mb-3 mb-sm-0">
+                                            <label for="clint_addr">Clint Address</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <textarea class="form-control" id="clint_addr" name="clint_addr"
+                                                placeholder="Clint Address"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <div class="col-sm-3 mb-3 mb-sm-0">
+                                            <label for="contact_no">Contact No</label>
+                                        </div>
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="number" class="form-control" id="contact_no" name="contact_no"
+                                                placeholder="Contact No">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <div class="col-sm-3 mb-3 mb-sm-0">
+                                            <label for="email">Email</label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="email" class="form-control" id="email" name="email"
+                                                placeholder="Email">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <div class="col-sm-3 mb-3 mb-sm-0">
+                                            <label for="proj_typ">Project From</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <select class="form-control" id="proj_typ" name="proj_typ" required>
+                                                <option>Select Type</option>
+                                                <% proj_frm.forEach((data)=> { %>
+                                                    <option value="<%= data._id %>">
+                                                        <%= data.name %>
+                                                    </option>
+                                                    <% }) %>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <div class="col-sm-3 mb-3 mb-sm-0">
+                                            <label for="buss_exe">Business Executive</label>
+                                        </div>
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" class="form-control" id="buss_exe" name="buss_exe"
+                                                placeholder="Business Executive">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <div class="col-sm-3 mb-3 mb-sm-0">
+                                            <label for="bill_typ">Bill Type</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <select class="form-control" id="bill_typ" name="bill_typ" required>
+                                                <option>Select Type</option>
+                                                <% bill_type.forEach((data)=> { %>
+                                                    <option value="<%= data._id %>">
+                                                        <%= data.name %>
+                                                    </option>
+                                                    <% }) %>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <div class="col-sm-3 mb-3 mb-sm-0">
+                                            <label for="currency">Currency Type</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <select class="form-control" id="currency" name="currency" required>
+                                                <option>Select Type</option>
+                                                <% currency.forEach((data)=> { %>
+                                                    <option value="<%= data._id %>">
+                                                        <%= data.name %>
+                                                    </option>
+                                                    <% }) %>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <div class="col-sm-3 mb-3 mb-sm-0">
+                                            <label for="pro_val">Project Value</label>
+                                        </div>
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" class="form-control" id="pro_val" name="pro_val"
+                                                placeholder="Project Value">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-2 mb-3 mb-sm-0">
+                                    <button type="submit" class="btn btn-primary btn-user btn-block">
+                                        Save
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include("../../partials/footer") %>
+        <script>
+            $(document).ready(function () {
+                $.ajax({
+                    type: "GET",
+                    url: "/get_project_id",
+                    dataType: 'html',
+                    success: function (result) {
+                        // console.log(result);
+                        var res = JSON.parse(result);
+                        if (res.length > 0) {
+                            $('#project_id').val(parseInt(res[0].project_code) + 1);
+                        } else {
+                            $('#project_id').val(1);
+                        }
+                    }
+                });
+            });
+        </script>

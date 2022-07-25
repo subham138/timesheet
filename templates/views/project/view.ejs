@@ -1,0 +1,218 @@
+<%- include("../../partials/template") %>
+    <style>
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 90px;
+            height: 34px;
+        }
+
+        .switchs {
+            position: relative;
+            display: inline-block;
+            width: 90px;
+            height: 34px;
+        }
+
+        .switch input {
+            display: none;
+        }
+
+        .switchs input {
+            display: none;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ca2222;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked+.slider {
+            background-color: #2ab934;
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked+.slider:before {
+            -webkit-transform: translateX(55px);
+            -ms-transform: translateX(55px);
+            transform: translateX(55px);
+        }
+
+        /*------ ADDED CSS ---------*/
+        .on {
+            display: none;
+        }
+
+        .off {
+            color: white;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 60%;
+            font-size: 9px;
+            font-family: Verdana, sans-serif;
+        }
+
+        .on {
+            color: white;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 40%;
+            font-size: 9px;
+            font-family: Verdana, sans-serif;
+        }
+
+        input:checked+.slider .on {
+            display: block;
+        }
+
+        input:checked+.slider .off {
+            display: none;
+        }
+
+        /*--------- END --------*/
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+    </style>
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+
+        <!-- Content Row -->
+        <div class="row">
+
+            <div class="col-xl-12 col-lg-12">
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Projects View</h6>
+                        <div class="dropdown no-arrow">
+                            <a href="/project_entry" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
+                                title="Add New">Add New
+                                <!-- <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i> -->
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Project Id</th>
+                                        <th>Project Name</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Project Id</th>
+                                        <th>Project Name</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
+                                        <th></th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    <% projects.forEach((data)=> {
+                                        %>
+                                        <tr>
+                                            <td>
+                                                <%= data.project_code; %>
+                                            </td>
+                                            <td>
+                                                <%= data.name; %>
+                                            </td>
+                                            <td><a class="btn btn-info btn-circle" data-toggle="tooltip"
+                                                    data-placement="top" title="Edit"
+                                                    href="/edit_project?id=<%=data.project_code; %>"><i
+                                                        class="fas fa-pencil-alt"></i></a>
+                                            </td>
+                                            <td><a class="btn btn-danger btn-circle" data-toggle="tooltip"
+                                                    data-placement="top" title="Delete"
+                                                    href="/delete_project?id=<%=data.project_code; %>"
+                                                    onclick="return check();"><i class="fas fa-trash"></i></a></td>
+                                            <td>
+                                                <div class="changestatus_custom">
+                                                    <label class="switch">
+                                                        <input type="checkbox" id="togBtn_<%=data.project_code; %>"
+                                                            class="tot status" name="status"
+                                                            value="<%=data.project_code; %>"
+                                                            onclick="set_isactive('<%=data.project_code %>');"
+                                                            <%=(data.isactive || data.isactive> 0) ? 'checked' : ''; %>
+                                                        />
+                                                        <div class="slider round">
+                                                            <!--ADDED HTML -->
+                                                            <span class="on">Active</span>
+                                                            <span class="off">Deactive</span>
+                                                            <!--END-->
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include("../../partials/footer") %>
+
+        <script>
+            function check() {
+                var x = confirm("Are you sure you want to delete?");
+                if (x)
+                    return true;
+                else
+                    return false;
+            }
+            function set_isactive(id) {
+                $.ajax({
+                    type: "GET",
+                    url: "/set_isactive",
+                    data: { id: id },
+                    dataType: 'html',
+                    success: function (result) {
+                        var res = JSON.parse(result);
+                        // console.log(res.isdone);
+                        if (res < 1) { alert('Something Went Wrong'); }
+
+                    }
+                });
+            }
+        </script>

@@ -1,0 +1,103 @@
+<%- include("../../partials/template") %>
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+
+        <!-- Content Row -->
+        <div class="row">
+
+            <div class="col-xl-12 col-lg-12">
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Sheet Entry</h6>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <form action="/sheet_entry" class="user" method="POST">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <div class="col-sm-3 mb-3 mb-sm-0">
+                                            <label for="date">Date</label>
+                                        </div>
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="date" class="form-control" id="date" name="date" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <div class="col-sm-2 mb-3 mb-sm-0">
+                                            <label for="project_id">Projects</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <select class="form-control" id="project_id" name="project_id" required>
+                                                <option>Select Projects</option>
+                                                <% project_list.forEach((data)=> { %>
+                                                    <option value="<%= data.project_code %>">
+                                                        <%= data.name %>
+                                                    </option>
+                                                    <% }) %>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <div class="col-sm-3 mb-3 mb-sm-0">
+                                            <label for="type">Type</label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <select class="form-control" id="type" name="type" required>
+                                                <option>Select Type</option>
+                                                <% type.forEach((data)=> { %>
+                                                    <option value="<%= data.name %>">
+                                                        <%= data.name %>
+                                                    </option>
+                                                    <% }) %>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <div class="col-sm-3 mb-3 mb-sm-0">
+                                            <label for="hours">Hours</label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" id="hours" name="hours" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <div class="col-sm-1 mb-3 mb-sm-0">
+                                            <label for="work_done">Work Done</label>
+                                        </div>
+                                        <div class="col-sm-11 mb-3 mb-sm-0">
+                                            <textarea class="form-control" id="work_done" name="work_done" rows="3"
+                                                required></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-2 mb-3 mb-sm-0">
+                                    <button type="submit" class="btn btn-primary btn-user btn-block">
+                                        Save
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include("../../partials/footer") %>

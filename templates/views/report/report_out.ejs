@@ -1,0 +1,157 @@
+<%- include("../../partials/template") %>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        table,
+        th {
+            border: 1px solid #dddddd;
+            padding: 3px 3px 3px 3px;
+            font-size: 12px;
+        }
+
+        table,
+        td {
+            border: 1px solid #dddddd;
+            padding: 4px 3px 4px 3px;
+            font-size: 13px;
+        }
+
+        th {
+            text-align: center;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+
+        <!-- Content Row -->
+        <div class="row">
+
+            <div class="col-xl-12 col-lg-12">
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Employe List</h6>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div id="divToPrint" style="overflow-x:auto;">
+                                    <p>
+                                        <center>
+                                            <h4 style="color:#6d64e8">Synergic Softek Solutions Pvt.Ltd.</h4>
+                                            <small><i>Module 7/18, 7th Floor,Acropolis<br>1858/1, Rajdanga Main
+                                                    Road<br>Kolkata
+                                                    - 700107<br>Ph : +913346006717</i></small><br>
+                                        </center>
+                                    </p>
+                                    <p>
+                                        <center>
+                                            <h4 style="color: #283592;">Time Sheet 2020-21</h4>
+                                        </center>
+                                    </p>
+                                    <p class="text-center"><b>
+                                            <%= name ? 'Name: ' : '' %>
+                                        </b>
+                                        <%= name ? name : '' %> &nbsp;&nbsp;&nbsp; <b>
+                                                <%= emp_id ? 'Emp Code: ' : '' %>
+                                            </b>
+                                            <%= emp_id ? emp_id : '' %> &nbsp;&nbsp;&nbsp; <b>Form: </b>
+                                                <%= form %> &nbsp;&nbsp;&nbsp; <b>To: </b>
+                                                    <%= to %> &nbsp;&nbsp;&nbsp; <b>
+                                                            <%= project_name ? 'Project: ' : '' %>
+                                                        </b>
+                                                        <%= project_name ? project_name : '' %>
+                                    </p>
+                                    <table style="width: 100%;" id="example">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Date</th>
+                                                <% if(name){}else{ %>
+                                                    <th>Emp Name</th>
+                                                    <% } %>
+                                                        <th>Project</th>
+                                                        <th>Work Done</th>
+                                                        <th>Type</th>
+                                                        <th>Hours</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% if(sheet_details.length> 0){
+                                                var i = 1;
+                                                var tot_hours = 0;
+                                                sheet_details.forEach((data)=>{
+                                                tot_hours += data.hours %>
+                                                <tr>
+                                                    <td>
+                                                        <%= i %>
+                                                    </td>
+                                                    <td>
+                                                        <%= data.date.getDate() + '/' + (data.date.getMonth()+1) + '/' +
+                                                            data.date.getFullYear() %>
+                                                    </td>
+                                                    <% if(name){}else{ %>
+                                                        <td>
+                                                            <%= data.emp_id.name %>
+                                                        </td>
+                                                        <% } %>
+                                                            <td>
+                                                                <%= data.project_id.name; %>
+                                                            </td>
+                                                            <td>
+                                                                <%= data.work_done; %>
+                                                            </td>
+                                                            <td>
+                                                                <%= data.work_type; %>
+                                                            </td>
+                                                            <td>
+                                                                <%= data.hours; %>
+                                                            </td>
+                                                </tr>
+                                                <% i++; }) %>
+                                                    <tr>
+                                                        <td colspan="<%= name ? '4' : '5' %>" class="text-center">
+                                                            <b>Total Hours</b>
+                                                        </td>
+                                                        <td colspan="2" class="text-center">
+                                                            <b>
+                                                                <%= tot_hours %>
+                                                            </b>
+                                                        </td>
+                                                    </tr>
+                                                    <% }else { %>
+                                                        <tr>
+                                                            <td class="text-center text-danger" colspan="6">NO DATA
+                                                                FOUND
+                                                            </td>
+                                                        </tr>
+                                                        <% } %>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div style="text-align: center; display: none;">
+                                    <div class="col-md-12 pt-5">
+                                        <div class="form-group row bttn-align">
+                                            <div class="col-md-2">
+                                                <button class="btn btn-primary" type="button"
+                                                    onclick="printDiv();">Print</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include("../../partials/footer") %>

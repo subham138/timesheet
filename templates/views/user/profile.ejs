@@ -1,0 +1,81 @@
+<%- include("../../partials/template") %>
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+
+        <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <img src="<%= (user_data.image != '' || user_data.image) ? '/uploads/' + user_data.image : 'img/user_img.png' %>"
+                                alt="Admin" class="rounded-circle" width="150">
+                            <div class="mt-3">
+                                <h4>
+                                    <%= user_data.name %>
+                                </h4>
+                                <p class="text-secondary mb-1">
+                                    <%= user.user_type=='A' ? 'Admin' : 'User' %>
+                                </p>
+                                <p class="text-muted font-size-sm">
+                                    <%= user_data.email %>
+                                </p>
+                                <button type="button" class="btn btn-outline-primary" id="update_profile">Update
+                                    Profile</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Emp Code</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <%= user_data.emp_code %>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Full Name</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <%= user_data.name %>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Email</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <%= user_data.email %>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Mobile</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <%= user_data.number %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <%- include("../../partials/footer") %>
+
+        <script>
+            $("#update_profile").on('click', function () {
+                var emp_code = "<%= user_data.emp_code %>";
+                window.location.href = "/update_user?id=" + emp_code;
+            })
+        </script>
